@@ -12,14 +12,14 @@ script:
   - docker run -e CI=true multi-docker npm run test -- --coverage
 
 after_success:
-  - docker build -t multi-docker ./client/multi-client -t ./client
-  - docker build -t multi-docker ./nginx/multi-nginx -f ./nginx
-  - docker build -t multi-docker ./server/multi-server -f ./server
-  - docker build -t multi-docker ./worker/multi-worker -f ./worker
+  - docker build -t multi-docker sean/multi-client -t ./client
+  - docker build -t multi-docker sean/multi-nginx -f ./nginx
+  - docker build -t multi-docker sean/multi-server -f ./server
+  - docker build -t multi-docker sean/multi-worker -f ./worker
   - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_ID" --password-stdin
   # Take those images and push them to docker hub
-  - docker push stephengrider/multi-client
-  - docker push stephengrider/multi-nginx
-  - docker push stephengrider/multi-server
-  - docker push stephengrider/multi-worker
+  - docker push sean/multi-client
+  - docker push sean/multi-nginx
+  - docker push sean/multi-server
+  - docker push sean/multi-worker
 
